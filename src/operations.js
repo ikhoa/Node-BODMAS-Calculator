@@ -4,7 +4,7 @@ class Calculator {
    * @param expression
    */
   constructor(expression) {
-    this._expression = expression
+     this._expression = expression
   }
 
   /**
@@ -12,12 +12,8 @@ class Calculator {
    * @returns {boolean}
    */
   isValidExpression() {
-    for(let char of this._expression) {
-      if ((isNaN(char) && !['+', '-', '/', '*', '%', '**'].includes(char))) {
-        return false;
-      }
-    }
-    return true
+    const matValidationRegex  = /(?:(?:^|[-+_*/])(?:\s*-?\d+(\.\d+)?(?:[eE][+-]?\d+)?\s*))+$/;
+    return matValidationRegex.test(this._expression.join(''));
   }
 
   /**
@@ -25,13 +21,6 @@ class Calculator {
    */
   compute() {
     let computedExo;
-    // try {
-    //   return eval(this._expression)
-    // } catch (e) {
-    //   if (e.name !== 'SyntaxError') throw e
-    //   return false;
-    // }
-    //1*4-12/2
     //Handle Multiply
     computedExo = this._applyMultiplication(this._expression)
 
@@ -41,7 +30,7 @@ class Calculator {
     //Handle Plus and Minus
     computedExo = this._applyAdditionAndSubtraction(this._expression)
 
-  return computedExo
+    return computedExo
 
   }
 
